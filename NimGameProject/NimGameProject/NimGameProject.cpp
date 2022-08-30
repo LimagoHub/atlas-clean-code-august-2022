@@ -4,15 +4,26 @@
 #include <iostream>
 #include "game_client.h"
 #include "nim_game_impl.h"
+#include "human_player.h"
+#include "computer_player.h"
 
-using namespace atlas::games;
+using namespace atlas::games::nim_game;
+using namespace atlas::games::nim_game::player;
 
 int main()
 {
+
+	human_player human_player_{ "Fritz" };
+	computer_player computer_player_{ "Computer" };
+	
 	nim_game_impl nim_game_impl_;
+
+	nim_game_impl_.addPlayer(&human_player_);
+	nim_game_impl_.addPlayer(&computer_player_);
+	
 	game_client client{ nim_game_impl_ };
 	client.run();
 	
-    std::cout << "Hello World!\n";
+   
 }
 

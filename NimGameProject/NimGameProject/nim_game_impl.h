@@ -3,109 +3,136 @@
 #include "game.h"
 #include <iostream>
 #include <string>
+#include <vector>
+
+#include "player.h"
+
 namespace atlas
 {
 	namespace games {
 
-		typedef
+		namespace nim_game {
+			using namespace atlas::games;
+			using namespace atlas::games::player;
 
-		class nim_game_impl: public  game
-		{
-			int stones;
-			int move;
-
-			
-
-
-			void execute_moves()  // Integration
+			class nim_game_impl : public  game
 			{
-				player_move();
-				computer_move();
-				
-			}
+				int stones;
+				int move;
+				game_player<int,int> * current_player;
 
-			
+				std::vector<game_player<int, int>*> players;
 
-			void player_move()
-			{
-				if (is_game_over()) return;
-				
-				
-
-				while (true) {
-					std::cout << "Es gibt " << stones << " Steine. Bitte nehmen Sie 1,2 oder 3!" << std::endl;
-					std::cin >> move;
-					if (move >= 1 && move <= 3)
-						break;
-					std::cout << "Unerlaubte Eingabe" << std::endl;
-				}
-				
-				terminate_move("Mensch");
-			}
-
-			void computer_move() // Operation
-			{
-
-				if (is_game_over()) return;
-				
-				const  int zuege[] = { 3,1,1,2 };
-				
-
-				move = zuege[stones % 4];
-				std::cout << "Computer nimmt " << move << "Steine." <<  std::endl;
-
-				
-				terminate_move("Computer");
-			}
-
-
-			
-
-			void terminate_move(std::string player)
-			{
-				update_board();
-				print_gameover_message_when_game_is_over(player);
-			}
-			
-			void print_gameover_message_when_game_is_over(std::string player)
-			{
-				if (is_game_over())
+				game_player<int, int>* get_current_player() const
 				{
-					std::cout << player << " hat verloren" << std::endl;
+					return current_player;
 				}
-			}
 
-			void update_board()
-			{
-				stones -= move;
-			}
-
-			bool is_game_over()
-			{
-				return stones < 1;
-			}
-			
-		public:
-
-
-			nim_game_impl()
-			{
-				stones = 23;
-				
-			}
-
-
-			
-
-			void play() override{
-
-				while(! is_game_over())
+				void set_current_player(game_player<int, int>* const current_player)
 				{
-					execute_moves();
+					this->current_player = current_player;
 				}
-			}
 
-		};
+				
+
+				void play_round()  
+				{
+					for(auto * player : players)
+					{
+						play_single_move_for_player(player);
+					}
+
+				}
+
+				void play_single_move_for_player(game_player<int, int>* player)
+				{
+					set_current_player(player);
+					play_single_move();
+				}
+
+
+				void play_single_move()
+				{
+					if (is_game_over()) return;
+					execute_move();
+					terminate_move();
+				}
+
+
+
+				void execute_move()
+				{
+					do
+					{
+						move = get_current_player()->do_turn(stones);
+					} while (players_move_is_invalid());
+				}
+
+
+
+				bool players_move_is_invalid()
+				{
+					if (is_move_valid()) return false;
+					std::cout << "Unerlaubter Zug" << std::endl;
+					return true;
+				}
+
+				
+				void terminate_move()
+				{
+					update_board();
+					print_gameover_message_when_game_is_over();
+				}
+
+				void print_gameover_message_when_game_is_over()
+				{
+					if (is_game_over())
+					{
+						std::cout << current_player->get_name() << " hat verloren" << std::endl;
+					}
+				}
+
+				bool is_move_valid()
+				{
+					return move >= 1 && move <= 3;
+				}
+				void update_board()
+				{
+					stones -= move;
+				}
+
+				bool is_game_over()
+				{
+					return stones < 1 || players.empty();
+				}
+
+			public:
+
+
+				
+
+				nim_game_impl()
+				{
+					stones = 23;
+
+				}
+
+
+				void addPlayer(game_player<int, int>* player)
+				{
+					players.emplace_back(player);
+				}
+
+				void play() override {
+
+					while (!is_game_over())
+					{
+						play_round();
+					}
+				}
+
+			};
+		}
 	}
 }
 

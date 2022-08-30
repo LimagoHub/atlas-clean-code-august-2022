@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Quelldateien">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Headerdateien">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -12,6 +8,25 @@
     <Filter Include="Ressourcendateien">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\game">
+      <UniqueIdentifier>{a9cd9694-17a3-4a95-a2c8-18b7076a2fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\client">
+      <UniqueIdentifier>{cfe56363-ac13-4f38-9ac3-e5865d361847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\game\nimgame">
+      <UniqueIdentifier>{d410c12b-23bd-4c96-a33d-032f6fb37d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\game\nimgame\player">
+      <UniqueIdentifier>{17ce6ab3-2de4-4533-b73a-b6e1ee392ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\game\player">
+      <UniqueIdentifier>{91ee1415-5f10-41b7-8c0e-0221507d269d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,13 +36,28 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\game</Filter>
     </ClInclude>
     <ClInclude Include="game_client.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\client</Filter>
     </ClInclude>
     <ClInclude Include="nim_game_impl.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\game\nimgame</Filter>
+    </ClInclude>
+    <ClInclude Include="abstract_nim_game_player.h">
+      <Filter>Headerdateien\game\nimgame\player</Filter>
+    </ClInclude>
+    <ClInclude Include="human_player.h">
+      <Filter>Headerdateien\game\nimgame\player</Filter>
+    </ClInclude>
+    <ClInclude Include="computer_player.h">
+      <Filter>Headerdateien\game\nimgame\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Headerdateien\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="abstract_player.h">
+      <Filter>Headerdateien\game\player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
