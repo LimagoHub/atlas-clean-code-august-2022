@@ -2,26 +2,35 @@
 
 #include "game.h"
 #include <iostream>
+#include <string>
 namespace atlas
 {
 	namespace games {
-		
+
+		typedef
 
 		class nim_game_impl: public  game
 		{
 			int stones;
-			bool gameover;
+			int move;
+
+			
 
 
-			void execute_moves()
+			void execute_moves()  // Integration
 			{
 				player_move();
 				computer_move();
+				
 			}
+
 			
+
 			void player_move()
 			{
-				int move;
+				if (is_game_over()) return;
+				
+				
 
 				while (true) {
 					std::cout << "Es gibt " << stones << " Steine. Bitte nehmen Sie 1,2 oder 3!" << std::endl;
@@ -30,39 +39,59 @@ namespace atlas
 						break;
 					std::cout << "Unerlaubte Eingabe" << std::endl;
 				}
-				stones -= move;
+				
+				terminate_move("Mensch");
 			}
 
-			void computer_move()
+			void computer_move() // Operation
 			{
+
+				if (is_game_over()) return;
+				
 				const  int zuege[] = { 3,1,1,2 };
-				if(stones < 1)
-				{
-					std::cout << "Du Loser" << std::endl;
-					gameover = true;
-					return;
-				}
+				
 
-				if (stones == 1)
-				{
-					std::cout << "Du hast nur Glueck gehabt!" << std::endl;
-					gameover = true;
-					return;
-				}
-
-				int move = zuege[stones % 4];
+				move = zuege[stones % 4];
 				std::cout << "Computer nimmt " << move << "Steine." <<  std::endl;
-				stones -= move;
+
+				
+				terminate_move("Computer");
+			}
+
+
+			
+
+			void terminate_move(std::string player)
+			{
+				update_board();
+				print_gameover_message_when_game_is_over(player);
 			}
 			
-		
+			void print_gameover_message_when_game_is_over(std::string player)
+			{
+				if (is_game_over())
+				{
+					std::cout << player << " hat verloren" << std::endl;
+				}
+			}
+
+			void update_board()
+			{
+				stones -= move;
+			}
+
+			bool is_game_over()
+			{
+				return stones < 1;
+			}
+			
 		public:
 
 
 			nim_game_impl()
 			{
 				stones = 23;
-				gameover = false;
+				
 			}
 
 
@@ -70,7 +99,7 @@ namespace atlas
 
 			void play() override{
 
-				while(! gameover)
+				while(! is_game_over())
 				{
 					execute_moves();
 				}

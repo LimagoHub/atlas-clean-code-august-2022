@@ -10,9 +10,11 @@ class game_client
 
 
 public:
-	game_client(game& game)
+	explicit game_client(game& game)
 		: game_(game)
 	{
+
+		// int x = 5;
 	}
 
 	void run()
