@@ -1,9 +1,10 @@
 #pragma once
-#include <iostream>
+
 #include <string>
 #include <vector>
 #include "game.h"
 #include "player.h"
+#include "writer.h"
 namespace atlas
 {
 	namespace games {
@@ -12,6 +13,8 @@ namespace atlas
 		template<class BOARD, class MOVE>
 		class abstract_game: public game
 		{
+
+			writer& writer_;
 			BOARD board;
 			MOVE move;
 
@@ -79,7 +82,7 @@ namespace atlas
 
 			void write(std::string message)
 			{
-				std::cout << message << std::endl;
+				writer_.write(message);
 			}
 
 			std::vector<game_player<BOARD, MOVE>*> get_players() const
@@ -124,7 +127,14 @@ namespace atlas
 			virtual bool is_game_over() = 0;
 
 		public :
-			void addPlayer(game_player<int, int>* player)
+
+
+			abstract_game(writer& writer)
+				: writer_(writer)
+			{
+			}
+
+			void addPlayer(game_player<BOARD, MOVE>* player)
 			{
 				players.emplace_back(player);
 			}

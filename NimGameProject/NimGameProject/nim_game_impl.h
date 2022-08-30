@@ -35,17 +35,13 @@ namespace atlas
 				}
 
 			public:
-				
 
-				nim_game_impl()
+
+				nim_game_impl(writer& writer)
+					: abstract_game<int, int>(writer)
 				{
 					set_board(23);
-
 				}
-
-
-				
-
 			};
 		}
 	}
