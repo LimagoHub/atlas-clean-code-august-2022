@@ -20,11 +20,11 @@ namespace atlas
 
 					int do_turn(const int& stones) override
 					{
-						int move;
+						
 						const  int zuege[] = { 3,1,1,2 };
 
 
-						move = zuege[stones % 4];
+						int move = zuege[stones % 4];
 						std::cout << "Computer nimmt " << move << " Steine." << std::endl;
 
 						return move;

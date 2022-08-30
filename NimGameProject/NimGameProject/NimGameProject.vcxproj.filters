@@ -33,6 +33,9 @@
     <ClCompile Include="NimGameProject.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Schwein.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -58,6 +61,12 @@
     </ClInclude>
     <ClInclude Include="abstract_player.h">
       <Filter>Headerdateien\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="abstract_game.h">
+      <Filter>Headerdateien\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Schwein.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@ public:
 		: game_(game)
 	{
 
-		// int x = 5;
+		
 	}
 
 	void run()
