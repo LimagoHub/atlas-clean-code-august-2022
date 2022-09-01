@@ -35,8 +35,11 @@ namespace atlas
 				}
 
 			public:
-
-
+				
+				/// <summary>
+				/// 
+				/// </summary>
+				/// <param name="writer"></param>
 				nim_game_impl(writer& writer)
 					: abstract_game<int, int>(writer)
 				{

@@ -136,11 +136,17 @@ namespace atlas
 
 			void addPlayer(game_player<BOARD, MOVE>* player)
 			{
+				// TODO was anderes
 				players.emplace_back(player);
 			}
 
-			void play() override {
 
+			/// <summary>
+			/// 
+			/// </summary>
+			void play() override {
+			
+				// TODO rename
 				while (!is_game_over())
 				{
 					play_round();
